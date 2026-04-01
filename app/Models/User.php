@@ -6,27 +6,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+
+// Import Notification tùy chỉnh cho Reset Password
+use App\Notifications\CustomResetPass;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
+     * Các cột được phép gán hàng loạt
      */
     protected $fillable = [
         'name',
         'email',
         'password',
+        'phone',   // <-- thêm cột phone (cần migration)
+        'photo',   // <-- thêm cột photo (cần migration)
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
+     * Ẩn các trường này khi serialize
      */
     protected $hidden = [
         'password',
@@ -34,15 +35,22 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Ép kiểu dữ liệu
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password'          => 'hashed',
+    ];
+
+    /**
+     * Override phương thức gửi email Reset Password.
+     * Thay vì dùng email mặc định của Laravel,
+     * sẽ dùng Notification CustomResetPass để tùy chỉnh nội dung.
+     *
+     * @param string $token
+     */
+    public function sendPasswordResetNotification($token)
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        $this->notify(new CustomResetPass($token));
     }
 }
