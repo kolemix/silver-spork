@@ -3,13 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
-
-
+// ===== TRANG CHÍNH & MOVIE DEMO =====
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 Route::get('/top-runtime', function () {
     $movies = DB::table('movie')->where('runtime', '>', 120)->limit(10)->get();
@@ -19,26 +19,20 @@ Route::get('/top-runtime', function () {
 Route::get('/top-vote', function () {
     $movies = DB::table('movie')->orderByDesc('vote_average')->limit(10)->get();
     return view('top_vote', compact('movies'));
-
 });
 
 Route::get('/phannguyenkhoinguyen', function () {
     return "Phan Nguyễn Khôi Nguyên";
 });
-
 Route::get('/doanphucgiakhanh', function () {
     return 'Doan Phuc Gia Khanh';
 });
-
-
 Route::get('/phuchibang', function () {
     return "Phu Chi Bang";
 });
-
 Route::get('/nguyentuandung', function () {
     return "Nguyen Tuan Dung";
 });
-
 
 Route::get('/top-movies', [MovieController::class, 'topMovies']);
 Route::get('/genres', [MovieController::class, 'genres']);
@@ -46,6 +40,8 @@ Route::get('/genres', [MovieController::class, 'genres']);
 Route::get('/test', function () {
     return view('test');
 });
+
+// ===== SÁCH =====
 Route::get('/sach', function () {
     $sach = DB::table('sach')->get();
     $theloai = DB::table('dm_the_loai')->get();
@@ -58,7 +54,25 @@ Route::get('/theloai/{id}', function ($id) {
     $tentheloai = DB::table('dm_the_loai')->where('id', $id)->first();
     return view('danh_sach_sach', compact('sach', 'theloai', 'tentheloai'));
 });
+
 Route::get('/sach/{id}', function ($id) {
     $sach = DB::table('sach')->where('id', $id)->first();
     return view('chi_tiet_sach', compact('sach'));
 });
+
+// ===== GIỎ HÀNG =====
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::patch('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+// ===== ĐẶT HÀNG =====
+Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
+// ===== DASHBOARD (chỉ khi login) =====
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
