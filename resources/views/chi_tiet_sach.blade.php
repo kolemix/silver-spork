@@ -238,7 +238,7 @@
 </div>
 
 <footer>
-    © 2026 — <span>Book Store</span> — Nhóm gồm 3 chàng trai 🎓
+    © 2026 — <span>Book Store</span> — Nhóm gồm 4 chàng trai 🎓
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
