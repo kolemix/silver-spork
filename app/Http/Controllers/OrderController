@@ -1,0 +1,7 @@
+use App\Mail\DonHangMail;
+use Illuminate\Support\Facades\Mail;
+
+// Sau khi lưu đơn hàng thành công
+$donHang = DonHang::create([...]);
+
+Mail::to($request->email)->send(new DonHangMail($donHang));
