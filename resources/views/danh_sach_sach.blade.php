@@ -6,148 +6,11 @@
     <title>📚 Book Store</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-        * { box-sizing: border-box; }
-        body { background-color: #f8f0eb; font-family: 'Segoe UI', sans-serif; }
-
-        /* NAVBAR */
-        .navbar {
-            background: linear-gradient(135deg, #c0392b, #e74c3c);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            padding: 10px 20px;
-        }
-        .navbar-brand {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: white !important;
-            letter-spacing: 1px;
-        }
-        .navbar .nav-link {
-            color: rgba(255,255,255,0.85) !important;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .navbar .nav-link:hover { color: white !important; }
-        .navbar .dropdown-toggle { color: white !important; font-weight: 600; }
-        .navbar .dropdown-menu {
-            border: none;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            border-radius: 10px;
-            min-width: 200px;
-        }
-        .navbar .dropdown-item { padding: 10px 20px; font-size: 0.9rem; }
-        .navbar .dropdown-item:hover { background: #fff0ee; color: #c0392b; }
-        .btn-auth {
-            border: 2px solid white;
-            color: white !important;
-            border-radius: 20px;
-            padding: 5px 16px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin-left: 6px;
-            transition: all 0.2s;
-        }
-        .btn-auth:hover { background: white; color: #c0392b !important; text-decoration: none; }
-        .btn-auth.filled { background: white; color: #c0392b !important; }
-        .btn-auth.filled:hover { background: transparent; color: white !important; }
-
-        /* HERO / FILTER BAR */
-        .filter-bar {
-            background: white;
-            border-radius: 12px;
-            padding: 16px 20px;
-            margin-bottom: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-        .filter-bar .btn-outline-danger {
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin: 3px;
-        }
-        .filter-bar .btn-danger {
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin: 3px;
-        }
-        .filter-bar .btn {
-            transition: all 0.25s ease;
-        }
-        .filter-bar .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        /* PAGE TITLE */
-        .page-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #2c2c2c;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #e74c3c;
-            display: inline-block;
-        }
-
-        /* CARD */
-        .book-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
-            transition: transform 0.2s, box-shadow 0.2s;
-            height: 100%;
-            border: none;
-        }
-        .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.13);
-        }
-        .book-card img {
-            height: 210px;
-            width: 100%;
-            object-fit: contain;   /* hiển thị full ảnh */
-            background: #fff;      /* nền trắng cho đẹp */
-        }
-
-        .book-card .card-body { padding: 14px; }
-        .book-card .card-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 4px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .book-card .author { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
-        .book-card .price {
-            font-size: 1rem;
-            font-weight: 800;
-            color: #e74c3c;
-            margin-bottom: 10px;
-        }
-        .btn-detail {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            width: 100%;
-            padding: 7px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: opacity 0.2s;
-        }
-        .btn-detail:hover { opacity: 0.88; color: white; text-decoration: none; }
-
-        /* FOOTER */
-        footer {
-            background: #1a1a1a;
-            color: #aaa;
-            padding: 20px;
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.9rem;
-        }
-        footer span { color: #e74c3c; }
+        body { background-color: #f5f5f5; }
+        .navbar { background-color: #ff5850; }
+        .navbar a { color: white !important; font-weight: bold; }
+        footer { background: #222; color: white; padding: 15px; text-align: center; margin-top: 30px; }
+        .card img { height: 200px; object-fit: cover; }
     </style>
 </head>
 <body>
@@ -191,40 +54,22 @@
 </nav>
 
 <div class="container mt-4">
-
-    {{-- BỘ LỌC THỂ LOẠI --}}
-    <div class="filter-bar">
-        {{-- TẤT CẢ --}}
-        <a href="/sach"
-        class="btn {{ request()->is('sach') ? 'btn-danger' : 'btn-outline-danger' }}">
-            Tất cả
-        </a>
-
-        {{-- THỂ LOẠI --}}
+    <!-- Nút thể loại -->
+    <div class="mb-3">
+        <button class="btn btn-danger mr-2" onclick="loadSach(0)">Tất cả</button>
         @foreach($theloai as $tl)
-            <a href="/theloai/{{ $tl->id }}"
-            class="btn {{ request()->is('theloai/'.$tl->id) ? 'btn-danger' : 'btn-outline-danger' }}">
+            <button class="btn btn-outline-danger mr-2" onclick="loadSach({{ $tl->id }})">
                 {{ $tl->ten_the_loai }}
-            </a>
+            </button>
         @endforeach
     </div>
 
-
-    {{-- TIÊU ĐỀ --}}
-    <div class="page-title">
-        @isset($tentheloai)
-            📂 {{ $tentheloai->ten_the_loai }}
-        @else
-            📚 Tất cả sách
-        @endisset
-    </div>
-
-    {{-- DANH SÁCH SÁCH --}}
-    <div class="row">
-        @forelse($sach as $s)
-        <div class="col-6 col-md-3 mb-4">
-            <div class="book-card">
-                <img src="{{ $s->link_anh_bia }}" alt="{{ $s->tieu_de }}">
+    <!-- Danh sách sách -->
+    <div class="row" id="danh-sach-sach">
+        @foreach($sach as $s)
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm">
+                <img src="{{ $s->link_anh_bia }}" class="card-img-top">
                 <div class="card-body">
                     <div class="card-title">{{ $s->tieu_de }}</div>
                     <div class="author">✍️ {{ $s->tac_gia }}</div>
@@ -239,14 +84,51 @@
             </div>
         @endforelse
     </div>
-
 </div>
 
-<footer>
-    © 2026 — <span>Book Store</span> — Nhóm gồm 4 chàng trai 🎓
-</footer>
+<footer>© 2026 - Nhóm gồm 3 chàng trai</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function loadSach(theloaiId) {
+    if (theloaiId == 0) {
+        location.reload();
+        return;
+    }
+
+    $.ajax({
+        url: '/api/sach-theo-theloai/' + theloaiId,
+        method: 'GET',
+        success: function(data) {
+            let html = '';
+            data.forEach(function(s) {
+                html += `
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="${s.link_anh_bia}" class="card-img-top" style="height:200px;object-fit:cover;">
+                        <div class="card-body">
+                            <h6 class="card-title">${s.tieu_de}</h6>
+                            <p class="text-muted">${s.tac_gia}</p>
+                            <p class="text-danger font-weight-bold">${Number(s.gia_ban).toLocaleString()} VNĐ</p>
+                            <a href="/sach/${s.id}" class="btn btn-danger btn-sm btn-block">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            $('#danh-sach-sach').html(html);
+        }
+    });
+}
+</script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+```
+
+---
+
+### 3. Kiểm tra:
+```
+http://127.0.0.1:8000/sach
