@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('order_id'); // bỏ constrained
             $table->string('ten_sach');
             $table->unsignedInteger('so_luong');
             $table->decimal('don_gia', 12, 0);

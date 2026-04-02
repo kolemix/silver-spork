@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-      Schema::create('chi_tiet_don_hang', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('don_hang_id')->constrained('don_hang')->onDelete('cascade');
-        $table->foreignId('sach_id')->constrained('sach');
-        $table->integer('so_luong');
-        $table->decimal('don_gia', 15, 0);
-        $table->timestamps();
-    });
+        Schema::create('chi_tiet_don_hang', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('don_hang_id')->constrained('don_hang')->onDelete('cascade');
+            $table->unsignedBigInteger('sach_id'); // bỏ constrained vì bảng sach không có migration
+            $table->integer('so_luong');
+            $table->decimal('don_gia', 15, 0);
+            $table->timestamps();
+        });
     }
 
     /**

@@ -74,7 +74,6 @@
     <a class="navbar-brand" href="/sach">📚 Book Store</a>
     <div class="navbar-nav mr-auto">
         <a class="nav-item nav-link" href="/sach">Tất cả sách</a>
-        <a class="nav-item nav-link" href="/theloai">Thể loại</a>
     </div>
     <div class="navbar-nav ml-auto">
         <a class="nav-item nav-link" href="/cart">🛒 Giỏ hàng</a>

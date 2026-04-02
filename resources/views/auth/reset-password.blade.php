@@ -1,39 +1,57 @@
 <x-guest-layout>
+
+    <h5 style="font-weight:800; color:#222; margin-bottom:12px; text-align:center;">🔑 Đặt lại mật khẩu</h5>
+    <p style="font-size:0.88rem; color:#666; text-align:center; margin-bottom:20px;">
+        Nhập mật khẩu mới cho tài khoản của bạn.
+    </p>
+
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 
-        <!-- Password Reset Token -->
+        {{-- Token ẩn --}}
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        {{-- Email --}}
+        <div class="form-group">
+            <label for="email">Email <span class="text-danger">*</span></label>
+            <input id="email" type="email" name="email"
+                   class="form-control @error('email') is-invalid @enderror"
+                   value="{{ old('email', $request->email) }}"
+                   required autofocus autocomplete="username">
+            @error('email')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        {{-- Mật khẩu mới --}}
+        <div class="form-group">
+            <label for="password">Mật khẩu mới <span class="text-danger">*</span></label>
+            <input id="password" type="password" name="password"
+                   class="form-control @error('password') is-invalid @enderror"
+                   placeholder="Tối thiểu 8 ký tự"
+                   required autocomplete="new-password">
+            @error('password')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        {{-- Xác nhận mật khẩu --}}
+        <div class="form-group">
+            <label for="password_confirmation">Xác nhận mật khẩu mới <span class="text-danger">*</span></label>
+            <input id="password_confirmation" type="password" name="password_confirmation"
+                   class="form-control"
+                   placeholder="Nhập lại mật khẩu mới"
+                   required autocomplete="new-password">
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
+        {{-- Nút submit --}}
+        <button type="submit" class="btn-primary-red mt-2">✅ Xác nhận đặt lại mật khẩu</button>
+
+        <hr class="divider">
+
+        <div class="text-center" style="font-size:0.88rem;">
+            <a class="auth-link" href="{{ route('login') }}">← Quay lại đăng nhập</a>
         </div>
     </form>
+
 </x-guest-layout>

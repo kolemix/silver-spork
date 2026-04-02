@@ -2,8 +2,8 @@
 <html lang="vi">
 <head>
     <meta charset="utf-8">
-    <title>{{ $sach->tieu_de }} - 📚 Book Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ $sach->tieu_de }} — Book Store</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body { background-color: #f8f0eb; font-family: 'Segoe UI', sans-serif; }
@@ -13,52 +13,6 @@
             background: linear-gradient(135deg, #c0392b, #e74c3c);
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             padding: 10px 20px;
-        }
-        .navbar-brand {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: white !important;
-            letter-spacing: 1px;
-        }
-        .navbar .nav-link {
-            color: rgba(255,255,255,0.85) !important;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .navbar .nav-link:hover { color: white !important; }
-
-        /* BOOK DETAIL */
-        .book-img {
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            background: #fff;
-            padding: 8px;
-        }
-        .book-info h2 {
-            font-weight: 700;
-            color: #2c2c2c;
-            margin-bottom: 10px;
-        }
-        .book-info p { margin-bottom: 6px; }
-        .book-info b { color: #c0392b; }
-        .book-desc {
-            background: #fff;
-            border-radius: 12px;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            margin-top: 15px;
-        }
-
-        /* BUTTONS */
-        .btn-danger {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-        }
-        .btn-outline-danger {
-            border-radius: 8px;
-            font-weight: 600;
         }
         .navbar-brand { font-size: 1.4rem; font-weight: 800; color: white !important; }
         .navbar .nav-link { color: rgba(255,255,255,0.85) !important; font-weight: 500; }
@@ -86,11 +40,7 @@
         .btn-auth.filled:hover { background: transparent; color: white !important; }
 
         /* BREADCRUMB */
-        .breadcrumb {
-            background: transparent;
-            padding: 12px 0 0 0;
-            font-size: 0.85rem;
-        }
+        .breadcrumb { background: transparent; padding: 12px 0 0 0; font-size: 0.85rem; }
         .breadcrumb-item a { color: #e74c3c; }
         .breadcrumb-item.active { color: #666; }
 
@@ -110,24 +60,9 @@
             padding: 5px;
             background: white;
         }
-        .book-title {
-            font-size: 1.7rem;
-            font-weight: 800;
-            color: #1a1a1a;
-            margin-bottom: 16px;
-            line-height: 1.3;
-        }
-        .info-row {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-        .info-label {
-            font-weight: 700;
-            color: #555;
-            min-width: 150px;
-        }
+        .book-title { font-size: 1.7rem; font-weight: 800; color: #1a1a1a; margin-bottom: 16px; line-height: 1.3; }
+        .info-row { display: flex; align-items: flex-start; margin-bottom: 10px; font-size: 0.95rem; }
+        .info-label { font-weight: 700; color: #555; min-width: 150px; }
         .info-value { color: #222; }
         .price-box {
             background: linear-gradient(135deg, #fff0ee, #ffe4e1);
@@ -138,11 +73,7 @@
             display: inline-block;
         }
         .price-box .price-label { font-size: 0.85rem; color: #888; margin-bottom: 2px; }
-        .price-box .price-value {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #e74c3c;
-        }
+        .price-box .price-value { font-size: 1.8rem; font-weight: 900; color: #e74c3c; }
         .desc-box {
             background: #fafafa;
             border-left: 4px solid #e74c3c;
@@ -153,15 +84,8 @@
             line-height: 1.7;
             color: #444;
         }
-        .desc-box h6 {
-            font-weight: 700;
-            color: #c0392b;
-            margin-bottom: 10px;
-        }
-        .btn-back {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            border: none;
+        .desc-box h6 { font-weight: 700; color: #c0392b; margin-bottom: 10px; }
+        .btn-action {
             border-radius: 10px;
             padding: 10px 24px;
             font-weight: 600;
@@ -169,18 +93,16 @@
             margin-top: 20px;
             display: inline-block;
             transition: opacity 0.2s;
+            border: none;
+            cursor: pointer;
         }
-        .btn-back:hover { opacity: 0.85; color: white; text-decoration: none; }
+        .btn-cart { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; }
+        .btn-cart:hover { opacity: 0.85; color: white; }
+        .btn-back { background: #f0f0f0; color: #333; margin-left: 10px; }
+        .btn-back:hover { opacity: 0.85; color: #333; text-decoration: none; }
 
         /* FOOTER */
-        footer {
-            background: #1a1a1a;
-            color: #aaa;
-            padding: 20px;
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.9rem;
-        }
+        footer { background: #1a1a1a; color: #aaa; padding: 20px; text-align: center; margin-top: 40px; font-size: 0.9rem; }
         footer span { color: #e74c3c; }
     </style>
 </head>
@@ -188,10 +110,6 @@
 
 {{-- NAVBAR --}}
 <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" href="/sach">📚 Book Store</a>
-    <div class="navbar-nav mr-auto">
-        <a class="nav-item nav-link" href="/sach">Tất cả sách</a>
-        <a class="nav-item nav-link" href="/theloai">Thể loại</a>
     <a class="navbar-brand" href="/">📚 Book Store</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
         <span style="color:white; font-size:1.4rem;">☰</span>
@@ -201,22 +119,24 @@
             <a class="nav-item nav-link" href="/sach">Tất cả sách</a>
         </div>
         <div class="navbar-nav ml-auto align-items-center">
+            @php $cartCount = collect(session()->get('cart', []))->sum('so_luong'); @endphp
+            <a class="nav-item nav-link" href="{{ route('cart.index') }}">
+                🛒 Giỏ hàng
+                @if($cartCount > 0)
+                    <span class="badge badge-light">{{ $cartCount }}</span>
+                @endif
+            </a>
             @auth
                 <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                         👤 {{ Auth::user()->name }}
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                            ⚙️ Cập nhật thông tin
-                        </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{{ route('profile.edit') }}">⚙️ Cập nhật thông tin</a>
                         <div class="dropdown-divider"></div>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button class="dropdown-item text-danger" type="submit">
-                                🚪 Đăng xuất
-                            </button>
+                            <button class="dropdown-item text-danger" type="submit">🚪 Đăng xuất</button>
                         </form>
                     </div>
                 </div>
@@ -226,46 +146,8 @@
             @endauth
         </div>
     </div>
-    <div class="navbar-nav ml-auto">
-        @php
-            $cartCount = collect(session()->get('cart', []))->sum('so_luong');
-        @endphp
-        <a class="nav-item nav-link" href="/cart">
-            🛒 Giỏ hàng
-            @if($cartCount > 0)
-                <span class="badge badge-light">{{ $cartCount }}</span>
-            @endif
-        </a>
-    </div>
 </nav>
 
-<div class="container mt-4">
-    <div class="row">
-        <!-- Ảnh sách -->
-        <div class="col-md-4">
-            <img src="{{ $sach->link_anh_bia }}" 
-                 alt="{{ $sach->tieu_de }}" 
-                 class="img-fluid book-img">
-        </div>
-
-        <!-- Thông tin sách -->
-        <div class="col-md-8 book-info">
-            <h2>{{ $sach->tieu_de }}</h2>
-            <p><b>Tác giả:</b> {{ $sach->tac_gia }}</p>
-            <p><b>Nhà xuất bản:</b> {{ $sach->nha_xuat_ban }}</p>
-            <p><b>Nhà cung cấp:</b> {{ $sach->nha_cung_cap }}</p>
-            <p><b>Hình thức bìa:</b> {{ $sach->hinh_thuc_bia }}</p>
-            <p><b>Giá bán:</b> {{ number_format($sach->gia_ban) }} VNĐ</p>
-
-            <form action="{{ route('cart.add', $sach->id) }}" method="POST" class="d-inline">
-                @csrf
-                <button type="submit" class="btn btn-danger">🛒 Thêm vào giỏ hàng</button>
-            </form>
-            <a href="/sach" class="btn btn-outline-danger ml-2">← Quay lại danh sách</a>
-
-            <div class="book-desc mt-3">
-                <p><b>Mô tả:</b></p>
-                <p>{{ $sach->mo_ta }}</p>
 <div class="container">
     {{-- BREADCRUMB --}}
     <nav aria-label="breadcrumb">
@@ -312,21 +194,28 @@
                     <div class="price-value">{{ number_format($sach->gia_ban) }} VNĐ</div>
                 </div>
 
+                {{-- NÚT HÀNH ĐỘNG --}}
+                <div>
+                    <form action="{{ route('cart.add', $sach->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn-action btn-cart">🛒 Thêm vào giỏ hàng</button>
+                    </form>
+                    <a href="/sach" class="btn-action btn-back">← Quay lại</a>
+                </div>
+
                 @if(!empty($sach->mo_ta))
                 <div class="desc-box">
                     <h6>📝 Mô tả</h6>
                     {{ $sach->mo_ta }}
                 </div>
                 @endif
-
-                <a href="/sach" class="btn-back">← Quay lại danh sách</a>
             </div>
         </div>
     </div>
 </div>
 
 <footer>
-    © 2026 — <span>Book Store</span> — Nhóm gồm 4 chàng trai 🎓
+    © 2026 — <span>Book Store</span> — Nhóm gồm 3 chàng trai 🎓
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

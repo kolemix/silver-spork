@@ -12,8 +12,7 @@ class OrderConfirmationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public $order) {}
-
+    public function __construct(public $order, public $items) {}
     public function envelope(): Envelope
     {
         return new Envelope(subject: 'Đặt hàng thành công!');
